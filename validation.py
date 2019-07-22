@@ -23,8 +23,8 @@ def evaluate():
         # 验证文件夹
         verification_dir = "validation/"
         # 数据总数
-        n_test = 717
         train, train_label = gbd.get_Data(verification_dir, ROW, COLUMN)
+        n_test = len(train)
         train_X, train_Y, one_hot_train_Y = gbd.get_batch_data(train, train_label, batch_size = BATCH_SIZE)
         train_logits, train_v_length = model.interface(inputs = train_X,
                                                 Y = one_hot_train_Y,
@@ -54,7 +54,7 @@ def evaluate():
                     true_count += np.sum(prediction)
                     step += 1
                     precision = float(true_count)/total_sample_count
-                print("precision = %3f"%precision)
+                    print("precision = %3f"%precision)
             except Exception as e:
                 coord.request_stop(e)
             finally:

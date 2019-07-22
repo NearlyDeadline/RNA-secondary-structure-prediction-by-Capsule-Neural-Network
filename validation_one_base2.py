@@ -7,7 +7,7 @@ Created on Wed Jul 17 15:27:45 2019
 """
 import numpy as np
 import tensorflow as tf
-import model
+import model_without_denslayer as mwd
 import get_batch_data as gbd
 
 ROW = 19
