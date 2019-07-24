@@ -170,7 +170,6 @@ def interface(inputs, Y, batch_size, vec_len, temp_batch_size):
                                 num_dims=vec_len3)
             digitcaps = tf.squeeze(digitcaps, axis=1)
 
-        print(digitcaps.get_shape())
         v_length = tf.sqrt(tf.reduce_sum(tf.square(digitcaps),
                                          axis=2,
                                          keep_dims=True) + 1e-9)
@@ -180,7 +179,6 @@ def interface(inputs, Y, batch_size, vec_len, temp_batch_size):
                       axis=2)
         logits=tf.squeeze(s2,
                       axis=2)
-        print(logits.shape)
 
     """
     with tf.variable_scope('Masking'):

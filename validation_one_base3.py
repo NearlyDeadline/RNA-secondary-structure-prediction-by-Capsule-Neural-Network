@@ -7,7 +7,7 @@ Created on Wed Jul 17 15:27:45 2019
 """
 import numpy as np
 import tensorflow as tf
-import model
+import model_without_denselayer as mwd
 import get_batch_data as gbd
 
 ROW = 19
@@ -26,7 +26,7 @@ def evaluate_one_base(train, train_label):
     """
     with tf.Graph().as_default():
         train_X, train_Y, one_hot_train_Y = gbd.get_batch_data(train, train_label, batch_size = BATCH_SIZE)
-        train_logits, train_v_length = model.interface(inputs = train_X,
+        train_logits, train_v_length = mwd.interface(inputs = train_X,
                                                 Y = one_hot_train_Y,
                                                 batch_size = BATCH_SIZE,
                                                 vec_len = VEC_LEN,

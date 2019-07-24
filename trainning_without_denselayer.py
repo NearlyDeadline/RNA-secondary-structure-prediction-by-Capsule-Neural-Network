@@ -17,7 +17,7 @@ PATH = "Cleaned_5sRNA_test/"
 row = 19
 column = 128
 vec_len = 2
-temp_batch_size = 64
+temp_batch_size = 16
 logs_train_dir="Net_model/"  # 保存训练得来的模型的文件夹
 inputs, Labels= gbd.get_Data(PATH=PATH,
                             row=row,

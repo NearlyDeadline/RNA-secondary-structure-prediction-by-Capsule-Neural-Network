@@ -31,9 +31,9 @@ for ct in testDir:
         headline = f.readline() # 标题行，写入每一个文件中
     nums, bases, matches = ipd.Get_Batch_Data(work_dir)
     result_list = [] # n*3大小的二维list，n行代表输入的ct文件有n个碱基，3代表每个碱基应该是左括号，右括号，点的概率
+    os.mkdir(work_dir + "temp")
     for index in nums[0]: # nums为二维数组, i为一维数组
-        os.mkdir(work_dir + index)
-        each_file = open(work_dir + index + '/' + index + '.ct', 'w')
+        each_file = open(work_dir + "temp/" + index + '.ct', 'w')
         each_file.write(headline)
         each_file.write(nums[0][int(index)-1])
         each_file.write(' ')
@@ -41,11 +41,11 @@ for ct in testDir:
         each_file.write(' 1 2 ') # 第三列和第四列，占位用
         each_file.write(matches[0][int(index)-1])
         each_file.close()
-        temp_result = vob2.evaluate_one_base(work_dir + index + "/")
+        temp_result = vob2.evaluate_one_base(work_dir + "temp/")
         result = temp_result[0][0], temp_result[0][1], temp_result[0][2] # 形成a,b,c三元tuple
         result_list.append(result)
-        os.remove(work_dir + index + '/' + index + '.ct')
-        os.rmdir(work_dir + index)
+        os.remove(work_dir + "temp/" + index + '.ct')
+    os.rmdir(work_dir + "temp")
     prediction = pd.DataFrame(columns = name, data = result_list) # 输出文件，若只想看评测参数请注释掉本行和下一行
     prediction.to_csv(work_dir + "prediction.csv")
     final_pre = fp.Nus_p(result_list, bases[0])
